@@ -1,0 +1,7 @@
+portfolio/
+├── README.md                    ← главная витрина
+├── mail-automation.md           ← описание проекта автоматизации почты
+├── vba-macros.md                ← 4 макроса для Excel
+├── goal-tracker.md              ← PWA «Трекер целей»
+├── love-play.md                 ← PWA «Давай играй»
+└── geekbrains.md                ← диплом + финмодель
