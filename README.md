@@ -58,6 +58,14 @@
 
 [Подробнее →](geekbrains.md)
 
+### Все проекты
+
+- [mail-automation](mail-automation.md) — автоматизация почтовых процессов (12 проектов, Python, GitHub Actions)
+- [vba-macros](vba-macros.md) — макросы для Excel: прайсы и дебиторка
+- [goal-tracker](goal-tracker.md) — трекер целей (PWA)
+- [love-play](love-play.md) — «Давай играй», 31 игра (PWA)
+- [geekbrains](geekbrains.md) — дипломный проект и финансовая модель
+
 ---
 
 ## Навыки
