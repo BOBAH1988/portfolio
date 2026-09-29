@@ -15,15 +15,15 @@
 
 ## Проекты
 
-### 🚀 mail-automation — автоматизация почты для бизнеса
+### 🚀 [mail-automation](mail-automation.md) — автоматизация почтовых процессов (12 проектов, Python, GitHub Actions)
+
 12 проектов обработки почты в облаке: рассылка прайсов, пересылка 
 заказов и счетов, ответы по дебиторке, KPI-отчёты. Работает без 
 участия человека через GitHub Actions.
 
 **Стек:** Python, IMAP/SMTP, openpyxl, GitHub Actions, CI/CD, pytest.  
-**Результат:** освободил до 10 часов в неделю рутины.
-
-[Подробнее →](mail-automation.md)
+**Результат:** 12 проектов в проде, 0 ручных рассылок, работа 24/7 
+без участия человека.
 
 ### 📊 VBA-макросы для Excel
 4 макроса для обработки прайс-листов и дебиторской задолженности. 
@@ -57,14 +57,6 @@
 модель (Excel/Google Sheets).
 
 [Подробнее →](geekbrains.md)
-
-### Все проекты
-
-- [mail-automation](mail-automation.md) — автоматизация почтовых процессов (12 проектов, Python, GitHub Actions)
-- [vba-macros](vba-macros.md) — макросы для Excel: прайсы и дебиторка
-- [goal-tracker](goal-tracker.md) — трекер целей (PWA)
-- [love-play](love-play.md) — «Давай играй», 31 игра (PWA)
-- [geekbrains](geekbrains.md) — дипломный проект и финансовая модель
 
 ---
 
