@@ -4,4 +4,6 @@ portfolio/
 ├── vba-macros.md                ← 4 макроса для Excel
 ├── goal-tracker.md              ← PWA «Трекер целей»
 ├── love-play.md                 ← PWA «Давай играй»
-└── geekbrains.md                ← диплом + финмодель
+├── geekbrains.md                ← диплом + финмодель
+└── screenshots/                 ← изображения для витрины
+    └── README.md                ← что класть и как обезличивать
