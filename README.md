@@ -10,13 +10,13 @@
 
 - Email: 79042044926@ya.ru
 - Telegram: [@Vsokolov1988](https://t.me/Vsokolov1988)
+- hh.ru: [резюме на hh.ru](https://ukhta.hh.ru/resume/4b51755fff1126f7830039ed1f6c386745426b)
 
 ---
 
 ## Проекты
 
-### 🚀 [mail-automation](mail-automation.md) — автоматизация почтовых процессов (12 проектов, Python, GitHub Actions)
-
+### 🚀 mail-automation — автоматизация почтовых процессов
 12 проектов обработки почты в облаке: рассылка прайсов, пересылка 
 заказов и счетов, ответы по дебиторке, KPI-отчёты. Работает без 
 участия человека через GitHub Actions.
@@ -24,6 +24,8 @@
 **Стек:** Python, IMAP/SMTP, openpyxl, GitHub Actions, CI/CD, pytest.  
 **Результат:** 12 проектов в проде, 0 ручных рассылок, работа 24/7 
 без участия человека.
+
+[Подробнее →](mail-automation.md)
 
 ### 📊 VBA-макросы для Excel
 4 макроса для обработки прайс-листов и дебиторской задолженности. 
@@ -74,3 +76,11 @@ Power Query, PWA / Service Worker, ИИ-агенты (Cline, DeepSeek, Claude).
 **Инструменты:** Git, CRM (MobyC), Google Sheets, MS Office.
 
 **Языки:** английский — B1.
+
+---
+
+## Рекомендации
+
+- Евгений Колодкин — руководитель отдела продаж, ООО «ЗОО Логистик»
+- Яна Еременко — супервайзер, Coca-Cola
+- Владислав Лебедев — супервайзер, Coca-Cola HBC Russia
