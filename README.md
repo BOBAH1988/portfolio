@@ -45,6 +45,16 @@ DeepSeek, Claude и Kilo Code.
 
 ---
 
+## Навигация
+
+- [Автоматизация почтовых процессов](mail-automation.md)
+- [Система рекомендаций к заказу](order-recommendations.md)
+- [VBA-макросы для Excel](vba-macros.md)
+- [Трекер целей](goal-tracker.md)
+- [Приложение «Давай играй»](love-play.md)
+- [Учебные аналитические проекты](geekbrains.md)
+- [Структура репозитория](repository-structure.md)
+
 ## Проекты
 
 ### 🚀 mail-automation — автоматизация почтовых процессов
