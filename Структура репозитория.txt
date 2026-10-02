@@ -1,6 +1,7 @@
 portfolio/
 ├── README.md                    ← главная витрина
 ├── mail-automation.md           ← описание проекта автоматизации почты
+├── order-recommendations.md     ← система рекомендаций к заказу
 ├── vba-macros.md                ← 4 макроса для Excel
 ├── goal-tracker.md              ← PWA «Трекер целей»
 ├── love-play.md                 ← PWA «Давай играй»
