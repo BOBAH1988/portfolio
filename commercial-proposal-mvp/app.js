@@ -63,23 +63,40 @@ function formatPrice(value) {
   if (value === null || value === undefined || value === "") {
     return "—";
   }
-  return value.toLocaleString("ru-RU") + " ₽";
+  return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
-function sumCell(price, quantity) {
-  if (price === null || price === undefined || price === "" || quantity === "") {
+function formatSum(price, quantity) {
+  if (price === null || price === undefined || price === "" || quantity === "" || quantity === null) {
     return "—";
   }
   const num = Number(quantity);
   if (!Number.isFinite(num) || num <= 0) {
     return "—";
   }
-  return (price * num).toLocaleString("ru-RU") + " ₽";
+  const value = price * num;
+  return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
 function createDraftRow(product) {
   const row = document.createElement("li");
   row.className = "draft-item";
+
+  const article = document.createElement("div");
+  article.className = "draft-field";
+  article.textContent = product.article;
+
+  const name = document.createElement("div");
+  name.className = "draft-field name";
+  name.textContent = product.name;
+
+  const price = document.createElement("div");
+  price.className = "draft-field price";
+  price.textContent = formatPrice(product.price);
+
+  const unit = document.createElement("div");
+  unit.className = "draft-field";
+  unit.textContent = product.unit;
 
   const status = document.createElement("span");
   status.className = "draft-status";
@@ -105,6 +122,10 @@ function createDraftRow(product) {
   remove.textContent = "Удалить";
   remove.dataset.productId = product.id;
 
+  row.appendChild(article);
+  row.appendChild(name);
+  row.appendChild(price);
+  row.appendChild(unit);
   row.appendChild(status);
   row.appendChild(quantity);
   row.appendChild(sum);
@@ -112,32 +133,59 @@ function createDraftRow(product) {
   row.appendChild(remove);
 
   quantity.addEventListener("input", () => {
-    const num = Number(quantity.value);
-    if (/^\d+$/.test(quantity.value)) {
-      sum.textContent = sumCell(product.price, quantity.value);
-      message.textContent = "";
-      status.textContent = "готово";
-      status.className = "draft-status ok";
-    } else if (quantity.value === "" || quantity.value === "0") {
-      sum.textContent = "—";
-      message.textContent = "Количество пустое или равно нулю.";
-      status.textContent = "ошибка";
-      status.className = "draft-status error";
-    } else if (num < 0) {
-      sum.textContent = "—";
-      message.textContent = "Количество не может быть отрицательным.";
-      status.textContent = "ошибка";
-      status.className = "draft-status error";
-    } else {
-      sum.textContent = "—";
-      message.textContent = "Количество должно быть целым числом.";
-      status.textContent = "ошибка";
-      status.className = "draft-status warning";
+    const item = draft.find((entry) => entry.product.id === product.id);
+    if (!item) {
+      return;
     }
+
+    item.quantity = quantity.value;
+
+    const priceCell = price;
+    const sumCell = sum;
+    const statusCell = status;
+    const messageCell = message;
+
+    if (price === null || price === undefined || price === "") {
+      priceCell.textContent = "—";
+      sumCell.textContent = "—";
+      statusCell.textContent = "предупреждение";
+      statusCell.className = "draft-status warning";
+      return;
+    }
+
+    if (quantity.value === "" || quantity.value === "0") {
+      sumCell.textContent = "—";
+      messageCell.textContent = "Количество пустое или равно нулю.";
+      statusCell.textContent = "ошибка";
+      statusCell.className = "draft-status error";
+      return;
+    }
+
+    if (!/^\d+$/.test(quantity.value)) {
+      sumCell.textContent = "—";
+      messageCell.textContent = "Количество должно быть целым числом.";
+      statusCell.textContent = "ошибка";
+      statusCell.className = "draft-status error";
+      return;
+    }
+
+    const num = Number(quantity.value);
+    if (num < 0) {
+      sumCell.textContent = "—";
+      messageCell.textContent = "Количество не может быть отрицательным.";
+      statusCell.textContent = "ошибка";
+      statusCell.className = "draft-status error";
+      return;
+    }
+
+    sumCell.textContent = formatSum(price, quantity.value);
+    messageCell.textContent = "";
+    statusCell.textContent = "готово";
+    statusCell.className = "draft-status ok";
   });
 
   remove.addEventListener("click", () => {
-    const index = draft.findIndex((item) => item.product.id === product.id);
+    const index = draft.findIndex((entry) => entry.product.id === product.id);
     if (index !== -1) {
       draft.splice(index, 1);
       render();
@@ -148,22 +196,20 @@ function createDraftRow(product) {
 }
 
 function addProductToDraft(product) {
-  const already = draft.some((item) => item.product.id === product.id);
+  const already = draft.some((entry) => entry.product.id === product.id);
   if (already) {
     showNotification("Товар уже добавлен в черновик.", "warning");
     return;
   }
-  if (product.price === null) {
-    showNotification("У товара нет цены. Сумма не рассчитывается.", "warning");
-  }
-  draft.push({ product });
+
+  draft.push({ product, quantity: "" });
   render();
 }
 
 function render() {
-  const catalog = $(".catalog");
-  const list = $(".draft-list");
-  const empty = $(".draft-empty");
+  const catalog = document.querySelector(".catalog");
+  const list = document.querySelector(".draft-list");
+  const empty = document.querySelector(".draft-empty");
 
   catalog.innerHTML = "";
   list.innerHTML = "";
@@ -207,11 +253,156 @@ function render() {
   if (draft.length === 0) {
     empty.hidden = false;
     list.hidden = true;
-  } else {
-    empty.hidden = true;
-    list.hidden = false;
-    draft.forEach((item) => list.appendChild(createDraftRow(item.product)));
+    return;
   }
+
+  empty.hidden = true;
+  list.hidden = false;
+
+  draft.forEach((entry) => {
+    const row = document.createElement("li");
+    row.className = "draft-item";
+
+    const article = document.createElement("div");
+    article.className = "draft-field";
+    article.textContent = entry.product.article;
+
+    const name = document.createElement("div");
+    name.className = "draft-field name";
+    name.textContent = entry.product.name;
+
+    const price = document.createElement("div");
+    price.className = "draft-field price";
+    price.textContent = formatPrice(entry.product.price);
+
+    const unit = document.createElement("div");
+    unit.className = "draft-field";
+    unit.textContent = entry.product.unit;
+
+    const quantity = document.createElement("input");
+    quantity.type = "text";
+    quantity.inputMode = "numeric";
+    quantity.placeholder = "введите количество";
+    quantity.dataset.productId = entry.product.id;
+    quantity.value = entry.quantity;
+
+    const sum = document.createElement("span");
+    sum.className = "draft-sum";
+
+    const message = document.createElement("span");
+    message.className = "draft-message";
+
+    const status = document.createElement("span");
+    status.className = "draft-status";
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "draft-remove";
+    remove.textContent = "Удалить";
+    remove.dataset.productId = entry.product.id;
+
+    row.appendChild(article);
+    row.appendChild(name);
+    row.appendChild(price);
+    row.appendChild(unit);
+    row.appendChild(status);
+    row.appendChild(quantity);
+    row.appendChild(sum);
+    row.appendChild(message);
+    row.appendChild(remove);
+
+    if (entry.product.price === null || entry.product.price === undefined || entry.product.price === "") {
+      price.textContent = "—";
+      sum.textContent = "—";
+      status.textContent = "предупреждение";
+      status.className = "draft-status warning";
+      message.textContent = "";
+      return;
+    }
+
+    if (entry.quantity === "" || entry.quantity === "0") {
+      sum.textContent = "—";
+      message.textContent = "Количество пустое или равно нулю.";
+      status.textContent = "ошибка";
+      status.className = "draft-status error";
+      return;
+    }
+
+    if (!/^\d+$/.test(entry.quantity)) {
+      sum.textContent = "—";
+      message.textContent = "Количество должно быть целым числом.";
+      status.textContent = "ошибка";
+      status.className = "draft-status error";
+      return;
+    }
+
+    const num = Number(entry.quantity);
+    if (num <= 0) {
+      sum.textContent = "—";
+      message.textContent = "Количество не может быть отрицательным.";
+      status.textContent = "ошибка";
+      status.className = "draft-status error";
+      return;
+    }
+
+    sum.textContent = formatSum(entry.product.price, entry.quantity);
+    message.textContent = "";
+    status.textContent = "готово";
+    status.className = "draft-status ok";
+
+    quantity.addEventListener("input", () => {
+      entry.quantity = quantity.value;
+
+      if (entry.product.price === null || entry.product.price === undefined || entry.product.price === "") {
+        price.textContent = "—";
+        sum.textContent = "—";
+        status.textContent = "предупреждение";
+        status.className = "draft-status warning";
+        message.textContent = "";
+        return;
+      }
+
+      if (quantity.value === "" || quantity.value === "0") {
+        sum.textContent = "—";
+        message.textContent = "Количество пустое или равно нулю.";
+        status.textContent = "ошибка";
+        status.className = "draft-status error";
+        return;
+      }
+
+      if (!/^\d+$/.test(quantity.value)) {
+        sum.textContent = "—";
+        message.textContent = "Количество должно быть целым числом.";
+        status.textContent = "ошибка";
+        status.className = "draft-status error";
+        return;
+      }
+
+      const num = Number(quantity.value);
+      if (num <= 0) {
+        sum.textContent = "—";
+        message.textContent = "Количество не может быть отрицательным.";
+        status.textContent = "ошибка";
+        status.className = "draft-status error";
+        return;
+      }
+
+      sum.textContent = formatSum(entry.product.price, quantity.value);
+      message.textContent = "";
+      status.textContent = "готово";
+      status.className = "draft-status ok";
+    });
+
+    remove.addEventListener("click", () => {
+      const index = draft.findIndex((draftEntry) => draftEntry.product.id === entry.product.id);
+      if (index !== -1) {
+        draft.splice(index, 1);
+        render();
+      }
+    });
+
+    list.appendChild(row);
+  });
 }
 
 function showNotification(message, type) {
