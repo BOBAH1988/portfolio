@@ -28,8 +28,6 @@
 }
 
 html {
-    font-size: 16px;
-    -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
@@ -42,36 +40,19 @@ body {
     color: var(--color-text);
     background-color: var(--color-bg);
     min-height: 100vh;
-    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
     width: 100%;
     max-width: 100%;
-}
-
-img,
-svg {
-    display: block;
-    max-width: 100%;
-}
-
-ul {
-    list-style: none;
-}
-
-a {
-    color: var(--color-primary);
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+    overflow-x: hidden;
 }
 
 header {
-    padding: var(--spacing-md) 0;
-    border-bottom: 1px solid var(--color-border);
     width: 100%;
     max-width: 100%;
     margin: 0;
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
 }
 
 header h1 {
@@ -81,11 +62,12 @@ header h1 {
 
 main {
     flex: 1 1 auto;
-    padding: var(--spacing-md) var(--container-padding);
-    display: flex;
-    flex-direction: column;
     width: 100%;
     max-width: 100%;
+    margin: 0;
+    padding: var(--spacing-lg) var(--container-padding);
+    display: flex;
+    flex-direction: column;
 }
 
 main .card {
@@ -132,14 +114,14 @@ button:active:not(:disabled) {
 }
 
 footer {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     padding: var(--spacing-md) 0;
     border-top: 1px solid var(--color-border);
     text-align: center;
     color: var(--color-text-secondary);
     font-size: 0.875rem;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
 }
 
 .notification-area {
