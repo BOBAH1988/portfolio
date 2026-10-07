@@ -78,123 +78,6 @@ function formatSum(price, quantity) {
   return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
-function createDraftRow(product) {
-  const row = document.createElement("li");
-  row.className = "draft-item";
-
-  const article = document.createElement("div");
-  article.className = "draft-field";
-  article.textContent = product.article;
-
-  const name = document.createElement("div");
-  name.className = "draft-field name";
-  name.textContent = product.name;
-
-  const price = document.createElement("div");
-  price.className = "draft-field price";
-  price.textContent = formatPrice(product.price);
-
-  const unit = document.createElement("div");
-  unit.className = "draft-field";
-  unit.textContent = product.unit;
-
-  const status = document.createElement("span");
-  status.className = "draft-status";
-  status.textContent = "ожидает количества";
-
-  const quantity = document.createElement("input");
-  quantity.type = "text";
-  quantity.inputMode = "numeric";
-  quantity.placeholder = "введите количество";
-  quantity.dataset.productId = product.id;
-
-  const sum = document.createElement("span");
-  sum.className = "draft-sum";
-  sum.textContent = "—";
-
-  const message = document.createElement("span");
-  message.className = "draft-message";
-  message.textContent = "";
-
-  const remove = document.createElement("button");
-  remove.type = "button";
-  remove.className = "draft-remove";
-  remove.textContent = "Удалить";
-  remove.dataset.productId = product.id;
-
-  row.appendChild(article);
-  row.appendChild(name);
-  row.appendChild(price);
-  row.appendChild(unit);
-  row.appendChild(status);
-  row.appendChild(quantity);
-  row.appendChild(sum);
-  row.appendChild(message);
-  row.appendChild(remove);
-
-  quantity.addEventListener("input", () => {
-    const item = draft.find((entry) => entry.product.id === product.id);
-    if (!item) {
-      return;
-    }
-
-    item.quantity = quantity.value;
-
-    const priceCell = price;
-    const sumCell = sum;
-    const statusCell = status;
-    const messageCell = message;
-
-    if (price === null || price === undefined || price === "") {
-      priceCell.textContent = "—";
-      sumCell.textContent = "—";
-      statusCell.textContent = "предупреждение";
-      statusCell.className = "draft-status warning";
-      return;
-    }
-
-    if (quantity.value === "" || quantity.value === "0") {
-      sumCell.textContent = "—";
-      messageCell.textContent = "Количество пустое или равно нулю.";
-      statusCell.textContent = "ошибка";
-      statusCell.className = "draft-status error";
-      return;
-    }
-
-    if (!/^\d+$/.test(quantity.value)) {
-      sumCell.textContent = "—";
-      messageCell.textContent = "Количество должно быть целым числом.";
-      statusCell.textContent = "ошибка";
-      statusCell.className = "draft-status error";
-      return;
-    }
-
-    const num = Number(quantity.value);
-    if (num < 0) {
-      sumCell.textContent = "—";
-      messageCell.textContent = "Количество не может быть отрицательным.";
-      statusCell.textContent = "ошибка";
-      statusCell.className = "draft-status error";
-      return;
-    }
-
-    sumCell.textContent = formatSum(price, quantity.value);
-    messageCell.textContent = "";
-    statusCell.textContent = "готово";
-    statusCell.className = "draft-status ok";
-  });
-
-  remove.addEventListener("click", () => {
-    const index = draft.findIndex((entry) => entry.product.id === product.id);
-    if (index !== -1) {
-      draft.splice(index, 1);
-      render();
-    }
-  });
-
-  return row;
-}
-
 function addProductToDraft(product) {
   const already = draft.some((entry) => entry.product.id === product.id);
   if (already) {
@@ -311,44 +194,7 @@ function render() {
     row.appendChild(message);
     row.appendChild(remove);
 
-    if (entry.product.price === null || entry.product.price === undefined || entry.product.price === "") {
-      price.textContent = "—";
-      sum.textContent = "—";
-      status.textContent = "предупреждение";
-      status.className = "draft-status warning";
-      message.textContent = "";
-      return;
-    }
-
-    if (entry.quantity === "" || entry.quantity === "0") {
-      sum.textContent = "—";
-      message.textContent = "Количество пустое или равно нулю.";
-      status.textContent = "ошибка";
-      status.className = "draft-status error";
-      return;
-    }
-
-    if (!/^\d+$/.test(entry.quantity)) {
-      sum.textContent = "—";
-      message.textContent = "Количество должно быть целым числом.";
-      status.textContent = "ошибка";
-      status.className = "draft-status error";
-      return;
-    }
-
-    const num = Number(entry.quantity);
-    if (num <= 0) {
-      sum.textContent = "—";
-      message.textContent = "Количество не может быть отрицательным.";
-      status.textContent = "ошибка";
-      status.className = "draft-status error";
-      return;
-    }
-
-    sum.textContent = formatSum(entry.product.price, entry.quantity);
-    message.textContent = "";
-    status.textContent = "готово";
-    status.className = "draft-status ok";
+    list.appendChild(row);
 
     quantity.addEventListener("input", () => {
       entry.quantity = quantity.value;
@@ -401,7 +247,44 @@ function render() {
       }
     });
 
-    list.appendChild(row);
+    if (entry.product.price === null || entry.product.price === undefined || entry.product.price === "") {
+      price.textContent = "—";
+      sum.textContent = "—";
+      status.textContent = "предупреждение";
+      status.className = "draft-status warning";
+      message.textContent = "";
+      return;
+    }
+
+    if (entry.quantity === "" || entry.quantity === "0") {
+      sum.textContent = "—";
+      message.textContent = "Количество пустое или равно нулю.";
+      status.textContent = "ошибка";
+      status.className = "draft-status error";
+      return;
+    }
+
+    if (!/^\d+$/.test(entry.quantity)) {
+      sum.textContent = "—";
+      message.textContent = "Количество должно быть целым числом.";
+      status.textContent = "ошибка";
+      status.className = "draft-status error";
+      return;
+    }
+
+    const num = Number(entry.quantity);
+    if (num <= 0) {
+      sum.textContent = "—";
+      message.textContent = "Количество не может быть отрицательным.";
+      status.textContent = "ошибка";
+      status.className = "draft-status error";
+      return;
+    }
+
+    sum.textContent = formatSum(entry.product.price, entry.quantity);
+    message.textContent = "";
+    status.textContent = "готово";
+    status.className = "draft-status ok";
   });
 }
 

@@ -51,7 +51,8 @@ header {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: var(--spacing-md) 0;
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -65,7 +66,8 @@ main {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: var(--spacing-lg) var(--container-padding);
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
     display: flex;
     flex-direction: column;
 }
@@ -117,7 +119,8 @@ footer {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: var(--spacing-md) 0;
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
     border-top: 1px solid var(--color-border);
     text-align: center;
     color: var(--color-text-secondary);
@@ -238,4 +241,8 @@ footer {
     margin: 0 auto;
     padding-left: var(--container-padding);
     padding-right: var(--container-padding);
+}
+
+header .warning {
+    margin-top: var(--spacing-md);
 }
