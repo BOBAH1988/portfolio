@@ -275,3 +275,10 @@ header .warning {
     border-radius: var(--radius);
     font-size: 0.875rem;
 }
+
+.usage-hint {
+    margin-top: var(--spacing-sm);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+}
