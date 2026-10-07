@@ -1,0 +1,132 @@
+:root {
+    --color-bg: #ffffff;
+    --color-text: #1f2933;
+    --color-text-secondary: #5a6672;
+    --color-border: #d9dee5;
+    --color-primary: #1f6feb;
+    --color-primary-hover: #1858c4;
+    --color-success: #1a7f37;
+    --color-error: #c62828;
+    --color-warning-bg: #fff8e1;
+    --color-warning-text: #5d4037;
+    --color-sidebar-bg: #f4f6f8;
+    --radius: 6px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --max-width: 1100px;
+    --container-padding: var(--spacing-lg);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+header {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+main {
+    padding: var(--spacing-lg) 0;
+}
+
+main .card {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+main .card h2 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+main .placeholder {
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+button {
+    font: inherit;
+    font-weight: 600;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+button:active:not(:disabled) {
+    background-color: var(--color-sidebar-bg);
+}
+
+footer {
+    padding: var(--spacing-md) 0;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+}
