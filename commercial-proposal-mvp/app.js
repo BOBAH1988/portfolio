@@ -57,8 +57,6 @@ const PRODUCTS = [
 const draft = [];
 const notifications = document.querySelector(".notifications");
 
-const $ = (selector) => document.querySelector(selector);
-
 function formatPrice(value) {
   if (value === null || value === undefined || value === "") {
     return "—";
