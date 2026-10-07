@@ -14,22 +14,18 @@
     <p class="warning">Демо-версия: используются условные данные. Интеграции с PIM и CRM не подключены</p>
 
     <main>
-        <section class="card">
-            <h2>Поиск товаров</h2>
-            <p class="placeholder">Контейнер для поиска товаров. Функционал будет добавлен в следующих версиях.</p>
+        <section class="card catalog-section">
+            <h2>Демонстрационный каталог</h2>
+            <div class="catalog"></div>
         </section>
 
-        <section class="card">
-            <h2>Результаты поиска</h2>
-            <p class="placeholder">Контейнер для отображения результатов поиска. Функционал будет добавлен в следующих версиях.</p>
-        </section>
-
-        <section class="card">
+        <section class="card draft-section">
             <h2>Черновик КП</h2>
-            <p class="placeholder">Контейнер для редактирования черновика коммерческого предложения. Функционал будет добавлен в следующих версиях.</p>
+            <ul class="draft-list"></ul>
+            <p class="draft-empty">Черновик пуст. Добавьте товар из каталога.</p>
         </section>
 
-        <button id="generate-btn" disabled>Сформировать черновик КП</button>
+        <div class="notifications" aria-live="polite"></div>
     </main>
 
     <footer class="notification-area">
