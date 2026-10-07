@@ -102,13 +102,21 @@ function applyQuantityState(entry, refs) {
     sum.textContent = "—";
     status.textContent = "предупреждение";
     status.className = "draft-status warning";
-    message.textContent = "";
+    message.textContent = "Цена товара недоступна, расчёт суммы невозможен.";
     return;
   }
 
-  if (value === "" || /^0+$/.test(value)) {
+  if (value === "") {
     sum.textContent = "—";
-    message.textContent = "Количество пустое или равно нулю.";
+    message.textContent = "Укажите положительное целое количество.";
+    status.textContent = "ошибка";
+    status.className = "draft-status error";
+    return;
+  }
+
+  if (/^0+$/.test(value)) {
+    sum.textContent = "—";
+    message.textContent = "Количество должно быть больше нуля.";
     status.textContent = "ошибка";
     status.className = "draft-status error";
     return;
@@ -124,7 +132,7 @@ function applyQuantityState(entry, refs) {
 
   if (!/^\d+$/.test(value)) {
     sum.textContent = "—";
-    message.textContent = "Количество должно быть целым числом.";
+    message.textContent = "Введите целое положительное число.";
     status.textContent = "ошибка";
     status.className = "draft-status error";
     return;
