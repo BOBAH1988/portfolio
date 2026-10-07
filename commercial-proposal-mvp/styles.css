@@ -282,3 +282,9 @@ header .warning {
     line-height: 1.5;
     color: var(--color-text-secondary);
 }
+
+header > p:not(.warning) {
+    margin-top: var(--spacing-sm);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
