@@ -179,6 +179,29 @@ footer {
     color: var(--color-text);
 }
 
+.draft-quantity {
+    width: 100%;
+    min-width: 0;
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    padding: 6px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.draft-quantity::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 1;
+}
+
+.draft-quantity:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(31, 111, 235, 0.15);
+}
+
 .draft-sum {
     font-weight: 600;
     color: var(--color-text);

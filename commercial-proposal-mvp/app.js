@@ -165,6 +165,7 @@ function render() {
     const quantity = document.createElement("input");
     quantity.type = "text";
     quantity.inputMode = "numeric";
+    quantity.className = "draft-quantity";
     quantity.placeholder = "введите количество";
     quantity.dataset.productId = entry.product.id;
     quantity.value = entry.quantity;
