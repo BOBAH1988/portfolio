@@ -126,7 +126,7 @@ footer {
 
 .notification-area {
     width: 100%;
-    max-width: 100%;
+    max-width: var(--max-width);
     margin: 0 auto;
 }
 
@@ -229,4 +229,13 @@ footer {
 .notification-message.error {
     background-color: #fdecea;
     color: var(--color-error);
+}
+
+header,
+main,
+footer {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
 }
