@@ -219,7 +219,7 @@ function render() {
     quantity.type = "text";
     quantity.inputMode = "numeric";
     quantity.className = "draft-quantity";
-    quantity.placeholder = "введите кол-во";
+    quantity.placeholder = "кол-во";
     quantity.dataset.productId = entry.product.id;
     quantity.value = entry.quantity;
 
