@@ -158,10 +158,11 @@ footer {
 
 .draft-item {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: 0.8fr 1.4fr 0.8fr 0.6fr 0.9fr minmax(140px, 1.3fr) 1fr;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm) 0;
     border-bottom: 1px solid var(--color-border);
+    align-items: center;
 }
 
 .draft-field {
@@ -289,7 +290,7 @@ header > p:not(.warning) {
     color: var(--color-text-secondary);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
     .catalog-item {
         grid-template-columns: repeat(2, 1fr);
     }
