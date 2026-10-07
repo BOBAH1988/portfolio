@@ -38,6 +38,9 @@ body {
     line-height: 1.6;
     color: var(--color-text);
     background-color: var(--color-bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 img,
@@ -77,7 +80,10 @@ header h1 {
 }
 
 main {
+    flex: 1 1 auto;
     padding: var(--spacing-lg) 0;
+    display: flex;
+    flex-direction: column;
 }
 
 main .card {
@@ -131,17 +137,11 @@ footer {
     font-size: 0.875rem;
     width: 100%;
     max-width: 100%;
-    margin: 0 auto;
 }
 
 .notification-area {
-    position: static;
-    left: 0;
-    right: 0;
-    margin-left: 0;
-    margin-right: 0;
-    max-width: 100%;
     width: 100%;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -175,6 +175,20 @@ footer {
     gap: var(--spacing-sm);
     padding: var(--spacing-sm) 0;
     border-bottom: 1px solid var(--color-border);
+}
+
+.draft-field {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.draft-field.name {
+    font-weight: 600;
+}
+
+.draft-field.price {
+    font-family: monospace;
+    color: var(--color-text);
 }
 
 .draft-sum {
