@@ -89,6 +89,53 @@ function addProductToDraft(product) {
   render();
 }
 
+function applyQuantityState(entry, refs) {
+  const { price, sum, status, message } = refs;
+  const value = entry.quantity;
+  const hasPrice =
+    entry.product.price !== null &&
+    entry.product.price !== undefined &&
+    entry.product.price !== "";
+
+  if (!hasPrice) {
+    price.textContent = "—";
+    sum.textContent = "—";
+    status.textContent = "предупреждение";
+    status.className = "draft-status warning";
+    message.textContent = "";
+    return;
+  }
+
+  if (value === "" || /^0+$/.test(value)) {
+    sum.textContent = "—";
+    message.textContent = "Количество пустое или равно нулю.";
+    status.textContent = "ошибка";
+    status.className = "draft-status error";
+    return;
+  }
+
+  if (value.startsWith("-")) {
+    sum.textContent = "—";
+    message.textContent = "Количество не может быть отрицательным.";
+    status.textContent = "ошибка";
+    status.className = "draft-status error";
+    return;
+  }
+
+  if (!/^\d+$/.test(value)) {
+    sum.textContent = "—";
+    message.textContent = "Количество должно быть целым числом.";
+    status.textContent = "ошибка";
+    status.className = "draft-status error";
+    return;
+  }
+
+  sum.textContent = formatSum(entry.product.price, value);
+  message.textContent = "";
+  status.textContent = "готово";
+  status.className = "draft-status ok";
+}
+
 function render() {
   const catalog = document.querySelector(".catalog");
   const list = document.querySelector(".draft-list");
@@ -199,45 +246,7 @@ function render() {
 
     quantity.addEventListener("input", () => {
       entry.quantity = quantity.value;
-
-      if (entry.product.price === null || entry.product.price === undefined || entry.product.price === "") {
-        price.textContent = "—";
-        sum.textContent = "—";
-        status.textContent = "предупреждение";
-        status.className = "draft-status warning";
-        message.textContent = "";
-        return;
-      }
-
-      if (quantity.value === "" || quantity.value === "0") {
-        sum.textContent = "—";
-        message.textContent = "Количество пустое или равно нулю.";
-        status.textContent = "ошибка";
-        status.className = "draft-status error";
-        return;
-      }
-
-      if (!/^\d+$/.test(quantity.value)) {
-        sum.textContent = "—";
-        message.textContent = "Количество должно быть целым числом.";
-        status.textContent = "ошибка";
-        status.className = "draft-status error";
-        return;
-      }
-
-      const num = Number(quantity.value);
-      if (num <= 0) {
-        sum.textContent = "—";
-        message.textContent = "Количество не может быть отрицательным.";
-        status.textContent = "ошибка";
-        status.className = "draft-status error";
-        return;
-      }
-
-      sum.textContent = formatSum(entry.product.price, quantity.value);
-      message.textContent = "";
-      status.textContent = "готово";
-      status.className = "draft-status ok";
+      applyQuantityState(entry, { price, sum, status, message });
     });
 
     remove.addEventListener("click", () => {
@@ -248,44 +257,7 @@ function render() {
       }
     });
 
-    if (entry.product.price === null || entry.product.price === undefined || entry.product.price === "") {
-      price.textContent = "—";
-      sum.textContent = "—";
-      status.textContent = "предупреждение";
-      status.className = "draft-status warning";
-      message.textContent = "";
-      return;
-    }
-
-    if (entry.quantity === "" || entry.quantity === "0") {
-      sum.textContent = "—";
-      message.textContent = "Количество пустое или равно нулю.";
-      status.textContent = "ошибка";
-      status.className = "draft-status error";
-      return;
-    }
-
-    if (!/^\d+$/.test(entry.quantity)) {
-      sum.textContent = "—";
-      message.textContent = "Количество должно быть целым числом.";
-      status.textContent = "ошибка";
-      status.className = "draft-status error";
-      return;
-    }
-
-    const num = Number(entry.quantity);
-    if (num <= 0) {
-      sum.textContent = "—";
-      message.textContent = "Количество не может быть отрицательным.";
-      status.textContent = "ошибка";
-      status.className = "draft-status error";
-      return;
-    }
-
-    sum.textContent = formatSum(entry.product.price, entry.quantity);
-    message.textContent = "";
-    status.textContent = "готово";
-    status.className = "draft-status ok";
+    applyQuantityState(entry, { price, sum, status, message });
   });
 }
 
