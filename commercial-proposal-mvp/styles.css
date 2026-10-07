@@ -288,3 +288,26 @@ header > p:not(.warning) {
     font-size: 0.9rem;
     color: var(--color-text-secondary);
 }
+
+@media (max-width: 640px) {
+    .catalog-item {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .draft-item {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .draft-item .draft-quantity {
+        grid-column: 1 / -1;
+    }
+
+    .draft-message {
+        grid-column: 1 / -1;
+    }
+
+    .draft-remove {
+        grid-column: 2 / 3;
+        justify-self: end;
+    }
+}
