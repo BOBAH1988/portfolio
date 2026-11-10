@@ -3,6 +3,7 @@
 ```text
 portfolio/
 ├── README.md                    ← главная страница портфолио
+├── money-path.md                ← PWA для учёта личных финансов
 ├── mail-automation.md           ← автоматизация почтовых процессов
 ├── order-recommendations.md     ← система рекомендаций к заказу
 ├── vba-macros.md                ← автоматизация Excel с помощью VBA
@@ -18,6 +19,7 @@ portfolio/
 ## Назначение файлов
 
 - `README.md` — главная страница и краткая витрина портфолио.
+- `money-path.md` — описание PWA для учёта личных финансов.
 - `mail-automation.md` — описание автоматизации почтовых процессов.
 - `order-recommendations.md` — описание системы рекомендаций к заказу.
 - `vba-macros.md` — описание Excel-макросов.
