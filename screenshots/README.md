@@ -6,8 +6,8 @@
 
 | Файл | Что на нём | Куда вставляется |
 |---|---|---|
-| `actions-log.png` | Лог GitHub Actions с зелёными галочками успешных запусков | `mail-automation.md` |
-| `workflow-graph.png` | Граф workflow из раздела Actions | `mail-automation.md` |
+| `actions-log.png` | Лог GitHub Actions с зелёными галочками успешных запусков | `ZOO_opt.md` |
+| `workflow-graph.png` | Граф workflow из раздела Actions | `ZOO_opt.md` |
 | `app.png` | Скриншот работающего приложения (goal-tracker, love-play) | В карточку проекта в `README.md` |
 
 ## Правила подготовки скриншотов
@@ -43,7 +43,7 @@
 
 ## Как вставить
 
-В `mail-automation.md`, в раздел «Результаты»:
+В `ZOO_opt.md`, в раздел «Результаты»:
 
 ```markdown
 ![Лог GitHub Actions: успешные запуски](screenshots/actions-log.png)
@@ -55,7 +55,7 @@
 
 | Файл | Статус |
 |---|---|
-| `actions-log.png` | ✅ добавлен в раздел «Результаты» (`mail-automation.md`), названия компаний замазаны, ширина 1200 px |
+| `actions-log.png` | ✅ добавлен в раздел «Результаты» (`ZOO_opt.md`), названия компаний замазаны, ширина 1200 px |
 | `order-summary.png` | ⬜ не загружен |
 | `workflow-graph.png` | ⬜ не загружен |
 | `app.png` | ⬜ не загружен |
