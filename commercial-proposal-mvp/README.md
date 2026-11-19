@@ -47,13 +47,20 @@ commercial-proposal-mvp/
 ├── styles.css
 ├── app.js
 ├── README.md
+├── AI_CONTEXT.md
 ├── requirements.md
 ├── test-cases.md
+├── docs/
+│   └── test-assignment-response.md
 ├── assets/
 │   └── .gitkeep
 └── screenshots/
     └── .gitkeep
 ```
+
+`AI_CONTEXT.md` — контекст проекта для AI-агентов: назначение, текущий статус
+и ограничения. `docs/test-assignment-response.md` — описание выполнения
+тестового задания, на котором построен прототип.
 
 ## Статус
 
